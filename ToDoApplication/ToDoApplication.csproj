@@ -65,6 +65,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="JavaTest.js" />
     <Content Include="classJavaScript.js" />
     <Content Include="ForSam.js" />
     <Content Include="index.html" />

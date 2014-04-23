@@ -1,26 +1,50 @@
-﻿//document.getElementById("todoInput").value;
-//document.getElementById("todoList").innerHTML;
+﻿"use strict";
+//must put in global scope so it doesnt get reset 
+var inputValue = [];
 
-"use strict";
-var toDoCounter = 0; //must put in global scope so it doesnt get reset
-
+// Function accepts the input item, pushes it to the array, and then draws the list
 function submitItem() {
     "use strict";
-    toDoCounter++;
-    var inputValue = document.getElementById("todoInput");
-    var outputValue = document.getElementById("todoList");
-
-    outputValue.innerHTML += '<button id="button' + toDoCounter
-        + '" type="button" onclick="hideList(\'item' + toDoCounter + '\', \'button' + toDoCounter + '\');">X</button>'
-        + '<li id="item' + toDoCounter + '" onclick="strikeThrough(\'item' + toDoCounter + '\');">'
-        + inputValue.value + '</li>';
+    inputValue.push(document.getElementById("todoInput").value);
+    drawArray();
 }
+// Function draws the list
+function drawArray() {
+    var outputValue = document.getElementById("todoList");
+    outputValue.innerHTML = "";
+    for (var i = 0; i < inputValue.length; i++) {
+        //draws the list starting with the down button
+        outputValue.innerHTML += '<button id = "downButton' + i + '"type="button" onclick="moveDown(' + i + ') ; ">Down</button>'
+        //up button
+        + '<button id="upButton' + i + '"type="button" onclick="moveUp(' + i + ');">Up</button>'
+        //hide button
+        + '<button id="button' + i + '" type="button" onclick="hideList(' + i + ');">X</button>'
+        //list
+        + '<li id="item' + i + '" onclick="strikeThrough(\'item' + i + '\');">' + inputValue[i] + '</li>';
+    }
+}
+// Function applies the "line-through" text style
 function strikeThrough(listItemId) {
     "use strict";
     document.getElementById(listItemId).setAttribute("class", "strikethrough");
 }
-function hideList(listItemId, buttonItemId) {
+// Function applies the "none" display style
+function hideList(count) {
     "use strict";
-    document.getElementById(listItemId).setAttribute("class", "hideList");
-    document.getElementById(buttonItemId).setAttribute("class", "hideList");
+    var tempList = inputValue.splice(count, 1);
+    drawArray();
+}
+// Function moves list item down 1
+function moveDown(count) {
+    "use strict";
+    var tempList = inputValue.splice(count, 1)
+    inputValue.splice(count + 1, 0, tempList)
+    drawArray();
+}
+// Function moves list item up 1
+function moveUp(count) {
+    "use strict";
+    var tempList = inputValue.splice(count, 1)
+    inputValue.splice(count - 1, 0, tempList)
+    drawArray();
 }
