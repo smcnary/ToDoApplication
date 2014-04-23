@@ -1,2 +1,6 @@
-﻿body {
+﻿.strikethrough {
+    text-decoration: line-through;
+}
+.hideList {
+    display: none;
 }
