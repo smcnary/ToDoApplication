@@ -2,8 +2,8 @@
 //document.getElementById("todoList").innerHTML = x;
 
 function submitItem() {
-    document.getElementById("todoList").innerHTML += "<li id='lists' onclick='strikeThrough();'>" + document.getElementById("todoInput").value + "</li>";
+    document.getElementById("todoList").innerHTML += "<li onclick='strikeThrough();'>" + document.getElementById("todoInput").value + "</li>";
 }
 function strikeThrough() {
-    document.getElementById("lists").style.textDecoration = "line-through";
+    event.target.style.textDecoration = "line-through";
 }
